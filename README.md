@@ -38,9 +38,7 @@ Após o treinamento, avaliamos a performance da Rede Neural. O modelo aprendeu a
 
 ![Gráfico de Acurácia e Perda](8_grafico_perda_e_acuracia.png)
 
-A **Matriz de Confusão** mostra o raio-X dos acertos e erros do modelo no conjunto de validação, alcançando uma **acurácia final de ~82%**.
-
-![Matriz de Confusão](9_matriz_confusao.png)
+A **Matriz de Confusão** mostra o raio-X dos acertos e erros do modelo no conjunto de validação, alcançando uma **acurácia final de ~82%**. O modelo é excelente em identificar quem não sobreviveu e tem um bom desempenho em prever os sobreviventes.
 
 ### Relatório de Classificação
 
@@ -51,8 +49,6 @@ O relatório abaixo detalha a performance do modelo para cada classe:
 | Não Sobreviveu | 0.81 | 0.90 | 0.86 | 105 |
 | Sobreviveu | 0.84 | 0.70 | 0.76 | 74 |
 
-
-A **Matriz de Confusão** mostra o raio-X dos acertos e erros do modelo no conjunto de validação, alcançando uma **acurácia final de ~82%**. O modelo é excelente em identificar quem não sobreviveu e tem um bom desempenho em prever os sobreviventes.
 
 ![Matriz de Confusão](9_matriz_confusao.png)
 
