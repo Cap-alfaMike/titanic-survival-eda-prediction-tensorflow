@@ -6,7 +6,7 @@ O script realiza um ciclo completo de um projeto de Machine Learning, desde a an
 
 ---
 
-##  storytelling: a hitstória contada pelos dados
+##  Storytelling: a hitstória contada pelos dados
 Antes de construir o modelo, realizamos uma Análise Exploratória dos Dados (EDA) para entender os fatores que influenciaram a sobrevivência.
 
 ### 1. O Cenário Geral: uma luta pela vida
