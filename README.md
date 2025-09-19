@@ -34,15 +34,23 @@ A matriz de correlação resume numericamente o que vimos. As características c
 
 ## Desempenho do Modelo
 
-Após o treinamento, avaliamos a performance da Rede Neural. O modelo aprendeu a generalizar os padrões em vez de apenas decorar os dados, como mostram as curvas de acurácia e perda.
+Após o treinamento, avaliamos a performance da Rede Neural. O modelo aprendeu a generalizar os padrões em vez de apenas decorar os dados, como mostram as curvas de acurácia e perda no gráfico abaixo.
 
-Classe	Precision	Recall	F1-Score	Support
-Não Sobreviveu	0.81	0.90	0.86	105
-Sobreviveu	0.84	0.70	0.76	74
+![Gráfico de Acurácia e Perda](8_grafico_perda_e_acuracia.png)
 
-| Histórico de Acurácia | Histórico de Perda |
-| :---: | :---: |
-| ![Gráfico de Acurácia](7_grafico_acuracia.png) | ![Gráfico de Perda](8_grafico_perda_e_acuracia.png) |
+A **Matriz de Confusão** mostra o raio-X dos acertos e erros do modelo no conjunto de validação, alcançando uma **acurácia final de ~82%**.
+
+![Matriz de Confusão](9_matriz_confusao.png)
+
+### Relatório de Classificação
+
+O relatório abaixo detalha a performance do modelo para cada classe:
+
+| Classe | Precision | Recall | F1-Score | Support |
+| :--- | :---: | :---: | :---: | :---: |
+| Não Sobreviveu | 0.81 | 0.90 | 0.86 | 105 |
+| Sobreviveu | 0.84 | 0.70 | 0.76 | 74 |
+
 
 A **Matriz de Confusão** mostra o raio-X dos acertos e erros do modelo no conjunto de validação, alcançando uma **acurácia final de ~82%**. O modelo é excelente em identificar quem não sobreviveu e tem um bom desempenho em prever os sobreviventes.
 
