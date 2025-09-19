@@ -1,0 +1,7 @@
+# Ambiente Virtual
+.venv/
+__pycache__/
+
+# Dados e Arquivos Gerados
+*.csv
+*.png
