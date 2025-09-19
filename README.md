@@ -6,11 +6,11 @@ O script realiza um ciclo completo de um projeto de Machine Learning, desde a an
 
 ---
 
-##  storytelling: A História Contada pelos Dados
+##  Storytelling: a história contada pelos dados
 
 Antes de construir o modelo, realizamos uma Análise Exploratória dos Dados (EDA) para entender os fatores que influenciaram a sobrevivência.
 
-### 1. O Cenário Geral: Uma Luta pela Vida
+### 1. O Cenário Geral: uma luta pela vida
 A realidade foi dura: dos passageiros no nosso conjunto de treino, **apenas 38.4% sobreviveram**. A sobrevivência foi a exceção, não a regra.
 
 ![Distribuição Geral de Sobrevivência](1_geral_sobrevivencia.png)
@@ -36,6 +36,10 @@ A matriz de correlação resume numericamente o que vimos. As características c
 ## Desempenho do Modelo
 
 Após o treinamento, avaliamos a performance da Rede Neural. O modelo aprendeu a generalizar os padrões em vez de apenas decorar os dados, como mostram as curvas de acurácia e perda.
+
+Classe	Precision	Recall	F1-Score	Support
+Não Sobreviveu	0.81	0.90	0.86	105
+Sobreviveu	0.84	0.70	0.76	74
 
 | Histórico de Acurácia | Histórico de Perda |
 | :---: | :---: |

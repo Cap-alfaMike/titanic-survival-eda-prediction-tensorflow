@@ -164,7 +164,7 @@ def plot_confusion_matrix(y_true, y_pred):
 # ==============================================================================
 def train_and_predict_model():
     """
-    Função que pré-processa os dados, treina a RNA e gera a submissão.
+    Função que pré-processa os dados, treina a RNA e gera o relatório.
     """
     print("--- INICIANDO TREINAMENTO DA REDE NEURAL ---")
     
@@ -230,20 +230,20 @@ def train_and_predict_model():
     print("\nRelatório de Classificação no Conjunto de Validação:")
     print(classification_report(y_val, y_pred_val, target_names=['Não Sobreviveu', 'Sobreviveu']))
 
-    # Gerar Submissão Final
+    # Gerar Arquivo Final
     print("[RNA 5/6] Gerando arquivo final...")
     predictions_prob = model.predict(X_test_scaled)
     predictions = (predictions_prob > 0.5).astype(int).flatten()
 
     submission_df = pd.DataFrame({'PassengerId': test_passenger_ids, 'Survived': predictions})
-    submission_df.to_csv('titanic_submission_rna.csv', index=False)
+    submission_df.to_csv('titanic_report_rna.csv', index=False)
     
     # Inspecionar o Arquivo de Submissão
     print("[RNA 6/6] Visualizando as primeiras linhas do arquivo final:")
     print(submission_df.head(10))
     
     print("\n--- PROCESSO FINALIZADO ---")
-    print("Arquivo 'titanic_rna.csv' gerado com sucesso!")
+    print("Arquivo 'titanic_report_rna.csv' gerado com sucesso!")
 
 
 if __name__ == "__main__":
