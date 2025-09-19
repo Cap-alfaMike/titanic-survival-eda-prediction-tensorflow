@@ -6,11 +6,10 @@ O script realiza um ciclo completo de um projeto de Machine Learning, desde a an
 
 ---
 
-##  storytelling: A História Contada pelos Dados
-
+##  storytelling: a hitstória contada pelos dados
 Antes de construir o modelo, realizamos uma Análise Exploratória dos Dados (EDA) para entender os fatores que influenciaram a sobrevivência.
 
-### 1. O Cenário Geral: Uma Luta pela Vida
+### 1. O Cenário Geral: uma luta pela vida
 A realidade foi dura: dos passageiros no nosso conjunto de treino, **apenas 38.4% sobreviveram**. A sobrevivência foi a exceção, não a regra.
 
 ![Distribuição Geral de Sobrevivência](1_geral_sobrevivencia.png)
