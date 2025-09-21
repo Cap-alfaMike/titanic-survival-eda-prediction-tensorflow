@@ -93,21 +93,26 @@ graph TD
         I1(Pclass); I2(Sex); I3(Age); I4(SibSp); I5(Parch); I6(Fare); I7(Embarked);
     end
 
+
     subgraph "1ª Camada Oculta (16 Neurônios)"
         N1_Hidden;
     end
+
 
     subgraph "2ª Camada Oculta (8 Neurônios)"
         N2_Hidden;
     end
 
+
     subgraph "Camada de Saída (1 Neurônio)"
         N_Out(Probabilidade de Sobrevivência);
     end
 
+
     I1 & I2 & I3 & I4 & I5 & I6 & I7 --> N1_Hidden;
     N1_Hidden --> N2_Hidden;
     N2_Hidden --> N_Out;
+
 
     style I1 fill:#cde4ff,stroke:#333
     style I2 fill:#cde4ff,stroke:#333
@@ -117,7 +122,8 @@ graph TD
     style I6 fill:#cde4ff,stroke:#333
     style I7 fill:#cde4ff,stroke:#333
     style N_Out fill:#d4edda,stroke:#333
-    
+
+
 ```
 
 
