@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import numpy as np
 import random
+from tensorflow.keras.utils import plot_model
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import confusion_matrix, classification_report
@@ -209,12 +210,22 @@ def train_and_predict_model():
     ])
     model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
     
+   # Fluxograma 
+    print("[RNA 3/7] Gerando resumo e fluxograma da arquitetura...")
+    # 1. Gerar o resumo em texto no console
+    print("Resumo da Arquitetura do Modelo:")
+    model.summary()
+
+    # 2. Gerar o fluxograma visual em um arquivo .png
+    plot_model(model, to_file='arquitetura_modelo.png', show_shapes=True, show_layer_names=True)
+
+
     # Treinar a RNA
-    print("[RNA 3/6] Treinando o modelo...")
+    print("[RNA 4/7] Treinando o modelo...")
     history = model.fit(X_train_scaled, y_train, epochs=100, batch_size=32, 
                         validation_data=(X_val_scaled, y_val),
                         verbose=0)
-    print("[RNA 4/6] Treinamento concluído.")
+    print("[RNA 5/7] Treinamento concluído.")
 
     # Visualizar Outputs do Treinamento
     plot_training_history(history)
@@ -231,7 +242,7 @@ def train_and_predict_model():
     print(classification_report(y_val, y_pred_val, target_names=['Não Sobreviveu', 'Sobreviveu']))
 
     # Gerar Arquivo Final
-    print("[RNA 5/6] Gerando arquivo final...")
+    print("[RNA 6/7] Gerando arquivo final...")
     predictions_prob = model.predict(X_test_scaled)
     predictions = (predictions_prob > 0.5).astype(int).flatten()
 
@@ -239,7 +250,7 @@ def train_and_predict_model():
     submission_df.to_csv('titanic_report_rna.csv', index=False)
     
     # Inspecionar o Arquivo de Submissão
-    print("[RNA 6/6] Visualizando as primeiras linhas do arquivo final:")
+    print("[RNA 7/7] Visualizando as primeiras linhas do arquivo final:")
     print(submission_df.head(10))
     
     print("\n--- PROCESSO FINALIZADO ---")
