@@ -32,13 +32,28 @@ A matriz de correlação resume numericamente o que vimos. As características c
 
 ---
 
+## Arquitetura do Modelo
+
+Para este problema, utilizei uma Rede Neural do tipo **Multilayer Perceptron (MLP)**. É uma arquitetura *feedforward* e totalmente conectada, ideal para problemas de classificação tabular como este.
+
+O fluxograma abaixo detalha a estrutura da rede:
+- **1 Camada de Entrada** que recebe os 7 atributos dos passageiros.
+- **2 Camadas Ocultas** com ativação ReLU, responsáveis por aprender os padrões nos dados.
+- **1 Camada de Saída** com ativação Sigmoid, que resulta na probabilidade de sobrevivência (um valor entre 0 e 1).
+
+![Arquitetura do Modelo](arquitetura_modelo.png)
+
+---
+
 ## Desempenho do Modelo
 
 Após o treinamento, avaliamos a performance da Rede Neural. O modelo aprendeu a generalizar os padrões em vez de apenas decorar os dados, como mostram as curvas de acurácia e perda no gráfico abaixo.
 
 ![Gráfico de Acurácia e Perda](8_grafico_perda_e_acuracia.png)
 
-A **Matriz de Confusão** mostra o raio-X dos acertos e erros do modelo no conjunto de validação, alcançando uma **acurácia final de ~82%**. O modelo é excelente em identificar quem não sobreviveu e tem um bom desempenho em prever os sobreviventes.
+A **Matriz de Confusão** mostra o raio-X dos acertos e erros do modelo no conjunto de validação, alcançando uma **acurácia final de ~82%**.
+
+![Matriz de Confusão](9_matriz_confusao.png)
 
 ### Relatório de Classificação
 
@@ -49,15 +64,12 @@ O relatório abaixo detalha a performance do modelo para cada classe:
 | Não Sobreviveu | 0.81 | 0.90 | 0.86 | 105 |
 | Sobreviveu | 0.84 | 0.70 | 0.76 | 74 |
 
-
-![Matriz de Confusão](9_matriz_confusao.png)
-
 ---
 
 ## Como Executar o Projeto
 
 1.  Clone este repositório: `git clone https://github.com/Cap-alfaMike/titanic-survival-eda-prediction-tensorflow.git`
 2.  Navegue até a pasta do projeto: `cd titanic-survival-eda-prediction-tensorflow`
-3.  Instale as dependências: `pip install pandas tensorflow scikit-learn matplotlib seaborn`
+3.  Instale as dependências: `pip install pandas tensorflow scikit-learn matplotlib seaborn pydot graphviz`
 4.  Coloque os arquivos `train.csv` e `test.csv` (baixados do Kaggle) na mesma pasta do script.
 5.  Execute o script no terminal: `python titanic_tensorflow.py`
