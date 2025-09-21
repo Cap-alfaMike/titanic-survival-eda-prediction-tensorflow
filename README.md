@@ -28,6 +28,7 @@ A análise combinada revela que mulheres da 1ª Classe foram o grupo com maior c
 ### 3. A Matemática Confirma a História
 A matriz de correlação resume numericamente o que vimos. As características com maior impacto na sobrevivência foram o **Gênero (`Sex`)** e a **Classe do Passageiro (`Pclass`)**.
 
+
 ![Matriz de Correlação](6_matriz_correlacao.png)
 
 ---
