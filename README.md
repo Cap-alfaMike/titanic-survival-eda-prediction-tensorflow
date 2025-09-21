@@ -97,7 +97,7 @@ A representação esquemática abaixo ilustra como os dados de um passageiro flu
 graph TD
 
 
-    subgraph "Camada de Entrada (7 Features)"
+    subgraph "Camada de Entrada (7 Features) <br/>"
 
 
 
@@ -105,20 +105,22 @@ graph TD
 
 
         I1(Pclass); I2(Sex); I3(Age); I4(SibSp); I5(Parch); I6(Fare); I7(Embarked);
+        <br/>
 
     end
 
 
-    subgraph "1ª Camada Oculta (16 Neurônios)"
+    subgraph "1ª Camada Oculta (16 Neurônios)<br/>"
 
 
 
         N1_Hidden;
+        <br/>
 
     end
 
 
-    subgraph "2ª Camada Oculta (8 Neurônios)"
+    subgraph "2ª Camada Oculta (8 Neurônios)<br/>"
 
 
 
@@ -127,20 +129,24 @@ graph TD
     end
 
 
-    subgraph "Camada de Saída (1 Neurônio)"
+    subgraph "Camada de Saída (1 Neurônio)<br/>"
 
 
 
         N_Out(Probabilidade de Sobrevivência);
+        <br/>
 
     end
 
 
     I1 & I2 & I3 & I4 & I5 & I6 & I7 --> N1_Hidden;
+    
 
     N1_Hidden --> N2_Hidden;
+    
 
     N2_Hidden --> N_Out;
+    
 
 
     style I1 fill:#cde4ff,stroke:#333
