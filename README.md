@@ -25,9 +25,13 @@ O famoso código de conduta marítima e a condição socioeconômica foram fator
 
 
 
+
+
 | Taxa de Sobrevivência por Gênero | Taxa de Sobrevivência por Classe |
 | :---: | :---: |
 | ![Sobrevivência por Gênero](2_sobrevivencia_por_genero.png) | ![Sobrevivência por Classe](3_sobrevivencia_por_classe.png) |
+
+
 
 
 
