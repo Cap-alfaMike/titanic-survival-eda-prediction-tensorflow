@@ -86,7 +86,8 @@ A representação esquemática abaixo ilustra como os dados de um passageiro flu
 
 
 
-```graph TD
+```mermaid
+graph TD
     subgraph " "
         direction LR
         I1["<b>Camada de Entrada</b><br/>7 Features<br/>(Pclass, Sex, Age...)"];
