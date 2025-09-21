@@ -81,7 +81,12 @@ O fluxograma abaixo detalha a estrutura da rede:
 
 ### Visão Geral da Arquitetura (Fluxo de Dados)
 
+
+
 A representação esquemática abaixo ilustra como os dados de um passageiro fluem através da rede para gerar uma previsão final.
+
+
+
 
 
 
