@@ -87,17 +87,26 @@ A representação esquemática abaixo ilustra como os dados de um passageiro flu
 
 
 ```mermaid
+
+
 graph TD
+
 
     subgraph "Camada de Entrada (7 Features)"
 
+
+
         direction LR
+
+
         I1(Pclass); I2(Sex); I3(Age); I4(SibSp); I5(Parch); I6(Fare); I7(Embarked);
 
     end
 
 
     subgraph "1ª Camada Oculta (16 Neurônios)"
+
+
 
         N1_Hidden;
 
@@ -106,12 +115,16 @@ graph TD
 
     subgraph "2ª Camada Oculta (8 Neurônios)"
 
+
+
         N2_Hidden;
 
     end
 
 
     subgraph "Camada de Saída (1 Neurônio)"
+
+
 
         N_Out(Probabilidade de Sobrevivência);
 
