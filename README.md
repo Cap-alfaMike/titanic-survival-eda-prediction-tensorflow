@@ -105,7 +105,7 @@ graph TD
 
 
         I1(Pclass); I2(Sex); I3(Age); I4(SibSp); I5(Parch); I6(Fare); I7(Embarked);
-        <br/>
+        
 
     end
 
@@ -115,7 +115,7 @@ graph TD
 
 
         N1_Hidden;
-        <br/>
+        
 
     end
 
@@ -134,7 +134,7 @@ graph TD
 
 
         N_Out(Probabilidade de Sobrevivência);
-        <br/>
+        
 
     end
 
