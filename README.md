@@ -94,90 +94,45 @@ A representação esquemática abaixo ilustra como os dados de um passageiro flu
 ```mermaid
 
 
+
+
+
 graph TD
-
-
-    subgraph "Camada de Entrada (7 Features) <br/>"
-
-
-
-        direction LR
-
-
-        I1(Pclass); I2(Sex); I3(Age); I4(SibSp); I5(Parch); I6(Fare); I7(Embarked);
-        
-
+    subgraph " "
+        I["<b>Camada de Entrada</b><br/>7 Features<br/>(Pclass, Sex, Age...)"]
     end
 
 
-    subgraph "1ª Camada Oculta (16 Neurônios)<br/>"
 
-
-
-        N1_Hidden;
-        
-
+    subgraph " "
+        H1["<b>1ª Camada Oculta</b><br/>16 Neurônios<br/>Ativação: ReLU"]
     end
 
 
-    subgraph "2ª Camada Oculta (8 Neurônios)<br/>"
 
-
-
-        N2_Hidden;
-
+    subgraph " "
+        H2["<b>2ª Camada Oculta</b><br/>8 Neurônios<br/>Ativação: ReLU"]
     end
 
 
-    subgraph "Camada de Saída (1 Neurônio)<br/>"
 
-
-
-        N_Out(Probabilidade de Sobrevivência);
-        
-
+    subgraph " "
+        O["<b>Camada de Saída</b><br/>1 Neurônio<br/>Ativação: Sigmoid<br/>(Probabilidade de Sobrevivência)"]
     end
 
 
-    I1 & I2 & I3 & I4 & I5 & I6 & I7 --> N1_Hidden;
-    
 
-    N1_Hidden --> N2_Hidden;
-    
+    I --> H1
+    H1 --> H2
+    H2 --> O
 
-    N2_Hidden --> N_Out;
-    
-
-
-    style I1 fill:#cde4ff,stroke:#333
-
-    style I2 fill:#cde4ff,stroke:#333
-
-    style I3 fill:#cde4ff,stroke:#333
-
-    style I4 fill:#cde4ff,stroke:#333
-
-    style I5 fill:#cde4ff,stroke:#333
-
-    style I6 fill:#cde4ff,stroke:#333
-
-    style I7 fill:#cde4ff,stroke:#333
-
-    style N_Out fill:#d4edda,stroke:#333
-
-
-
-
-
-
-
-
-
-
-
-
+    style I fill:#cde4ff,stroke:#333,stroke-width:2px
+    style H1 fill:#fff2cc,stroke:#333,stroke-width:2px
+    style H2 fill:#fff2cc,stroke:#333,stroke-width:2px
+    style O fill:#d4edda,stroke:#333,stroke-width:2px
 
 ```
+
 
 
 ## Desempenho do Modelo
