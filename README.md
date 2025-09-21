@@ -117,12 +117,7 @@ graph TD
     style I6 fill:#cde4ff,stroke:#333
     style I7 fill:#cde4ff,stroke:#333
     style N_Out fill:#d4edda,stroke:#333
-
-
-
-
-
----
+```
 
 
 ## Desempenho do Modelo
