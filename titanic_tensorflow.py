@@ -43,12 +43,21 @@ def run_exploratory_data_analysis():
         print("Erro: O arquivo 'train.csv' não foi encontrado. Certifique-se de que ele está no mesmo diretório do script.")
         return
 
+    # Criar uma cópia do DataFrame para as plots para não alterar o original
+    df_plot = df.copy()
+    # Traduzir a coluna 'Sex' para os gráficos, eliminando a necessidade de set_xticklabels
+    df_plot['Gênero'] = df_plot['Sex'].map({'female': 'Mulher', 'male': 'Homem'})
+    # Criar uma coluna 'Sobreviveu_Label' para os gráficos
+    df_plot['Sobreviveu_Label'] = df_plot['Survived'].map({0: 'Não Sobreviveu', 1: 'Sobreviveu'})
+
+
     # 1. Análise Geral de Sobrevivência
     print("\n[Storytelling 1/6] Analisando a taxa geral de sobrevivência...")
     plt.figure()
-    ax = sns.countplot(x='Survived', data=df, palette='viridis')
+    # CORRIGIDO: Adicionado hue e legend=False
+    ax = sns.countplot(data=df_plot, x='Sobreviveu_Label', hue='Sobreviveu_Label', palette='viridis', legend=False)
     ax.set_title('Distribuição Geral de Sobrevivência', fontsize=16)
-    ax.set_xticklabels(['Não Sobreviveu (0)', 'Sobreviveu (1)'])
+    ax.set_xlabel('Situação') # O Label já tem a informação (0) e (1)
     for p in ax.patches:
         ax.annotate(f'{p.get_height()}', (p.get_x() + p.get_width() / 2., p.get_height()), ha='center', va='center', xytext=(0, 10), textcoords='offset points')
     plt.savefig('1_geral_sobrevivencia.png', bbox_inches='tight')
@@ -57,9 +66,9 @@ def run_exploratory_data_analysis():
     # 2. Análise por Gênero
     print("[Storytelling 2/6] Analisando a sobrevivência por gênero...")
     plt.figure()
-    ax = sns.barplot(x='Sex', y='Survived', data=df, palette='plasma', estimator=lambda x: sum(x==1)*100.0/len(x))
+    # CORRIGIDO: Usando a coluna 'Gênero' traduzida e adicionado hue
+    ax = sns.barplot(x='Gênero', y='Survived', data=df_plot, hue='Gênero', palette='plasma', estimator=lambda y: sum(y)*100.0/len(y), legend=False)
     ax.set_title('Taxa de Sobrevivência por Gênero', fontsize=16)
-    ax.set_xticklabels(['Mulher', 'Homem'])
     ax.set_ylabel('Taxa de Sobrevivência (%)')
     for p in ax.patches:
         ax.annotate(f'{p.get_height():.1f}%', (p.get_x() + p.get_width() / 2., p.get_height()), ha='center', va='center', xytext=(0, 10), textcoords='offset points')
@@ -69,7 +78,8 @@ def run_exploratory_data_analysis():
     # 3. Análise por Classe Social
     print("[Storytelling 3/6] Analisando a sobrevivência por classe social...")
     plt.figure()
-    ax = sns.barplot(x='Pclass', y='Survived', data=df, palette='magma', estimator=lambda x: sum(x==1)*100.0/len(x))
+    # CORRIGIDO: Adicionado hue e legend=False
+    ax = sns.barplot(x='Pclass', y='Survived', data=df_plot, hue='Pclass', palette='magma', estimator=lambda y: sum(y)*100.0/len(y), legend=False)
     ax.set_title('Taxa de Sobrevivência por Classe Social', fontsize=16)
     ax.set_xlabel('Classe do Passageiro')
     ax.set_ylabel('Taxa de Sobrevivência (%)')
@@ -81,7 +91,8 @@ def run_exploratory_data_analysis():
     # 4. Análise por Idade
     print("[Storytelling 4/6] Analisando a distribuição de idade...")
     plt.figure()
-    sns.histplot(data=df, x='Age', hue='Survived', kde=True, multiple='stack', palette='viridis')
+    # CORRIGIDO: Usando a coluna 'Sobreviveu_Label' para a legenda
+    sns.histplot(data=df_plot, x='Age', hue='Sobreviveu_Label', kde=True, multiple='stack', palette='viridis')
     plt.title('Distribuição de Idade por Sobrevivência', fontsize=16)
     plt.legend(title='Situação', labels=['Sobreviveu', 'Não Sobreviveu'])
     plt.savefig('4_sobrevivencia_por_idade.png', bbox_inches='tight')
@@ -89,10 +100,12 @@ def run_exploratory_data_analysis():
 
     # 5. Análise Combinada: Classe e Gênero
     print("[Storytelling 5/6] Analisando a combinação de classe e gênero...")
-    g = sns.catplot(x="Pclass", hue="Sex", col="Survived", data=df, kind="count", height=6, aspect=.7, palette='plasma')
+    # CORRIGIDO: Usando a coluna 'Sobreviveu_Label' para os títulos das colunas
+    g = sns.catplot(x="Pclass", hue="Gênero", col="Sobreviveu_Label", data=df_plot, kind="count", height=6, aspect=.7, palette='plasma',
+                    col_order=['Não Sobreviveu', 'Sobreviveu']) # Garante a ordem
     g.fig.suptitle('Contagem de Sobrevivência por Classe e Gênero', y=1.03)
     g.set_axis_labels("Classe Social", "Número de Passageiros")
-    g.set_titles("Não Sobreviveu" if "{col_name}" == "0" else "Sobreviveu")
+    g.set_titles("{col_name}") # Usa o valor da coluna diretamente como título
     plt.savefig('5_classe_genero_sobrevivencia.png', bbox_inches='tight')
     plt.close()
 
@@ -108,7 +121,7 @@ def run_exploratory_data_analysis():
     plt.title('Matriz de Correlação das Features', fontsize=16)
     plt.savefig('6_matriz_correlacao.png', bbox_inches='tight')
     plt.close()
-    
+
     print("--- ANÁLISE EXPLORATÓRIA CONCLUÍDA ---")
     print("Gráficos salvos como arquivos .png no diretório.\n")
 
@@ -119,8 +132,9 @@ def plot_training_history(history):
     """
     Plota os gráficos de acurácia e perda durante o treinamento.
     """
-    # Gráfico de Acurácia
     plt.figure(figsize=(12, 5))
+
+    # Gráfico de Acurácia
     plt.subplot(1, 2, 1)
     plt.plot(history.history['accuracy'], label='Acurácia de Treino')
     plt.plot(history.history['val_accuracy'], label='Acurácia de Validação')
@@ -128,7 +142,6 @@ def plot_training_history(history):
     plt.xlabel('Época')
     plt.ylabel('Acurácia')
     plt.legend()
-    plt.savefig('7_grafico_acuracia.png')
     
     # Gráfico de Perda (Loss)
     plt.subplot(1, 2, 2)
@@ -175,7 +188,7 @@ def train_and_predict_model():
     test_passenger_ids = test_df['PassengerId']
 
     # Pré-processamento
-    print("[RNA 1/6] Pré-processando os dados...")
+    print("[RNA 1/7] Pré-processando os dados...")
     def preprocess(df):
         df['Age'] = df['Age'].fillna(df['Age'].mean())
         df['Embarked'] = df['Embarked'].fillna('S')
@@ -201,24 +214,27 @@ def train_and_predict_model():
     X_test_scaled = scaler.transform(test_df)
 
     # Construir e Compilar a RNA
-    print("[RNA 2/6] Construindo o modelo...")
+    print("[RNA 2/7] Construindo o modelo...")
     model = tf.keras.models.Sequential([
-        tf.keras.layers.InputLayer(input_shape=(X_train_scaled.shape[1],)),
-        tf.keras.layers.Dense(units=16, activation='relu'),
-        tf.keras.layers.Dense(units=8, activation='relu'),
-        tf.keras.layers.Dense(units=1, activation='sigmoid')
+        tf.keras.layers.InputLayer(shape=(X_train_scaled.shape[1],)),
+        tf.keras.layers.Dense(units=16, activation='relu', name='Camada_Oculta_1'),
+        tf.keras.layers.Dense(units=8, activation='relu', name='Camada_Oculta_2'),
+        tf.keras.layers.Dense(units=1, activation='sigmoid', name='Camada_de_Saida')
     ])
     model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
     
-   # Fluxograma 
+    # Gerar resumo e fluxograma da arquitetura
     print("[RNA 3/7] Gerando resumo e fluxograma da arquitetura...")
-    # 1. Gerar o resumo em texto no console
     print("Resumo da Arquitetura do Modelo:")
     model.summary()
-
-    # 2. Gerar o fluxograma visual em um arquivo .png
-    plot_model(model, to_file='arquitetura_modelo.png', show_shapes=True, show_layer_names=True)
-
+    try:
+        plot_model(model, to_file='arquitetura_modelo.png', show_shapes=True, show_layer_names=True)
+        print("Fluxograma 'arquitetura_modelo.png' gerado com sucesso.")
+    except ImportError:
+        print("\nAVISO: Não foi possível gerar o fluxograma do modelo.")
+        print("Para isso, instale 'pydot' e 'graphviz'.")
+        print("Comandos: pip install pydot graphviz")
+        print("E instale o programa Graphviz no seu sistema: https://graphviz.org/download/\n")
 
     # Treinar a RNA
     print("[RNA 4/7] Treinando o modelo...")
